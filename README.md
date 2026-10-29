@@ -13,10 +13,6 @@ filtering by tier, and `.ics` export for any subset. It holds the same data as t
 below, embedded in the file, and runs entirely in the browser with no build step or network
 access: clone the repo and open it, or download the single file.
 
-> To serve it as a web page instead, enable GitHub Pages on this repo
-> (Settings → Pages → Source: `main`, folder `/`), which publishes it at
-> `https://<owner>.github.io/cv-conference-deadlines/`.
-
 ## Closing within 45 days
 
 - **VISAPP (VISIGRAPP)** — 2026-10-29 paper (D-0) · 22nd International Conference on Computer Vision Theory and Applications
