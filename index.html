@@ -257,6 +257,8 @@ footer p { margin: 6px 0; }
      no timezone. Always confirm on the official site before planning a submission.</p>
   <p>Cells marked <span class="flag">⚠</span> are unverified or come from conflicting official sources —
      open a venue for the details.</p>
+  <p id="icsNote" hidden>Calendar (<code>.ics</code>) export is unavailable in this viewer —
+     open the page from the repository or a local copy to use it.</p>
   <p id="src"></p>
 </footer>
 
@@ -294,6 +296,17 @@ const parse = s => { const [y,m,d] = s.split("-").map(Number); return new Date(y
 const addDays = (d, n) => { const x = new Date(d); x.setDate(x.getDate()+n); return x; };
 const today = (() => { const n = new Date(); return new Date(n.getFullYear(), n.getMonth(), n.getDate()); })();
 const daysTo = s => Math.round((parse(s) - today) / 86400000);
+
+/* .ics export works when this file is opened as an ordinary page — from a local clone or
+   from GitHub Pages. Inside the claude.ai artifact viewer a page is granted no download
+   permission, and .ics is outside the downloads capability's allowed extensions, so there
+   the affordance is hidden rather than left as a button that silently does nothing. */
+const IN_VIEWER = typeof window.claude === "object" && window.claude !== null
+                  && typeof window.claude.use === "function";
+function applyExportSupport() {
+  document.getElementById("icsAll").hidden = IN_VIEWER;
+  document.getElementById("icsNote").hidden = !IN_VIEWER;
+}
 
 /* The "Abstract / reg." column is not always earlier than the paper deadline — for some venues
    it holds a late-breaking or position-paper round. So the next action is simply the earliest
@@ -471,7 +484,8 @@ function openVenue(name) {
     + row("Location", esc(r.loc))
     + row("Notes", `<div class="note">${notes}</div>`);
   document.getElementById("dSite").style.display = r.url ? "" : "none";
-  document.getElementById("dIcs").style.display = (r.paper || r.abs || r.confStart) ? "" : "none";
+  document.getElementById("dIcs").style.display =
+    (!IN_VIEWER && (r.paper || r.abs || r.confStart)) ? "" : "none";
   dlg.showModal();
 }
 document.getElementById("dClose").onclick = () => dlg.close();
@@ -566,6 +580,7 @@ document.getElementById("src").innerHTML =
   + 'Corrections welcome — include the official URL you took the date from.';
 
 function render() { renderUpcoming(); renderCal(); renderList(); }
+applyExportSupport();
 render();
 </script>
 </body>
