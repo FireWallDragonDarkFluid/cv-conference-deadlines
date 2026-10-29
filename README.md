@@ -8,7 +8,14 @@ where one was reachable; where it was not, the source is named in the Notes colu
 Rows or cells marked ⚠ are unverified or come from conflicting sources — **always confirm on
 the official site before you plan a submission.**
 
-📅 **[Open the interactive calendar](https://firewalldragondarkfluid.github.io/cv-conference-deadlines/)** — month grid, live countdowns, filtering by tier, and `.ics` export for any subset. The same data as the tables below; it runs entirely in the browser, so you can also just open `index.html` from a local clone.
+📅 **Interactive calendar: [`index.html`](index.html)** — month grid, live countdowns,
+filtering by tier, and `.ics` export for any subset. It holds the same data as the tables
+below, embedded in the file, and runs entirely in the browser with no build step or network
+access: clone the repo and open it, or download the single file.
+
+> To serve it as a web page instead, enable GitHub Pages on this repo
+> (Settings → Pages → Source: `main`, folder `/`), which publishes it at
+> `https://<owner>.github.io/cv-conference-deadlines/`.
 
 ## Closing within 45 days
 
